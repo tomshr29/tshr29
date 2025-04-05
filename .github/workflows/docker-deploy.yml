@@ -1,4 +1,4 @@
-name: Build and Deploy Docker Imaged
+name: Build and Deploy Docker Image
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1 # Prépare l'environnement Docker pour la construction
 
-      - name: Log in to GitHub Container Registryd
+      - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io # Registre GitHub Container Registry
@@ -38,6 +38,19 @@ jobs:
           username: root # L'utilisateur pour SSH (ex: root)
           key: ${{ secrets.SERVER_SSH_KEY }} # La clé privée SSH stockée dans les secrets GitHub
           script: |
-            docker pull ghcr.io/tomshr29/t29:latest  # Récupère la dernière image depuis GitHub
-            docker-compose down  # Arrête les conteneurs en cours
-            docker-compose up -d --build  # Redémarre les conteneurs en arrière-plan après le rebuild
+            # Installer Docker Compose sur le serveur (si nécessaire)
+            if ! command -v docker-compose &> /dev/null
+            then
+                echo "Docker Compose could not be found. Installing..."
+                curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                chmod +x /usr/local/bin/docker-compose
+            fi
+
+            # Pull la dernière image Docker
+            docker pull ghcr.io/tomshr29/t29:latest
+
+            # Arrêter les conteneurs en cours
+            docker-compose down
+
+            # Rebuild et redémarre les conteneurs
+            docker-compose up -d --build
