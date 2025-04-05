@@ -65,6 +65,6 @@ jobs:
               -e HOST=localhost \
               -e LOG_LEVEL=info \
               -e APP_KEY=FVd3NZ2lhTv_mnbwmqSw6Lu9sQzsIEpf \
-              -e NODE_ENV=development \
+              -e NODE_ENV=production \
               -e SESSION_DRIVER=cookie \
               ghcr.io/tomshr29/t29:latest
