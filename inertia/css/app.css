@@ -1,12 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 @import 'tailwindcss';
 
-* {
-  margin: 0;
-  padding: 0;
+@layer base {
+  * {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
 }
 
-html,
-body {
-  height: 100%;
-  width: 100%;
+@theme inline {
+  --animate-aurora: aurora 60s linear infinite;
+  @keyframes aurora {
+    from {
+      background-position:
+        50% 50%,
+        50% 50%;
+    }
+    to {
+      background-position:
+        350% 50%,
+        350% 50%;
+    }
+  }
 }
