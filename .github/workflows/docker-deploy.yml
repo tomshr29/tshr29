@@ -41,9 +41,13 @@ jobs:
             # Pull la dernière image Docker
             docker pull ghcr.io/tomshr29/t29:latest
 
-            # Arrêter et supprimer les conteneurs existants si besoin
-            docker stop my_container || true
-            docker rm my_container || true
+            # Vérifier si le port 3333 est libre avant de démarrer le conteneur
+            if sudo lsof -i :3333; then
+              echo "Le port 3333 est déjà utilisé. Arrêt et suppression du conteneur existant."
+              docker stop my_container || true
+              docker rm my_container || true
+            fi
 
             # Démarrer le conteneur avec la nouvelle image
+            echo "Démarrage du conteneur sur le port 3333..."
             docker run -d --name my_container -p 3333:3333 ghcr.io/tomshr29/t29:latest
