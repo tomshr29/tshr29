@@ -1,0 +1,39 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main # Change si ta branche principale a un autre nom
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: 188.245.240.223.sslip.io # Ton IP ou domaine
+          username: root # Utilisateur SSH
+          key: b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZWQyNTUxOQAAACD47oMWqhkVvTbA6whaqRBeEzsIsHB+KxK5HBkijdtb3wAAAJixCr1nsQq9ZwAAAAtzc2gtZWQyNTUxOQAAACD47oMWqhkVvTbA6whaqRBeEzsIsHB+KxK5HBkijdtb3wAAAECKki0TojiOtF6ye/6q6vyDRU1JyKQNKpg/ykgok/JpN/jugxaqGRW9NsDrCFqpEF4TOwiwcH4rErkcGSKN21vfAAAAD3RvbS5zY2hlcmVyQHQyOQECAwQFBg== # Clé privée SSH stockée dans les secrets GitHub
+          script: |
+            # Se rendre dans le répertoire où cloner ou mettre à jour le projet
+            cd /home/ubuntu  # ou le répertoire où tu veux cloner ton projet
+            # Cloner ou mettre à jour le code sur le serveur
+            if [ ! -d "t29" ]; then
+              git clone https://github.com/t29/t29.git  # Cloner le projet si ce n'est pas déjà fait
+            else
+              cd t29
+              git pull origin main  # Mettre à jour le projet si déjà cloné
+            fi
+            # Accéder au répertoire du projet
+            cd /home/ubuntu/t29  # Assure-toi que c'est le bon chemin vers ton projet
+            # Reconstruire et redémarrer les conteneurs Docker
+            docker compose down
+            docker compose up -d --build
