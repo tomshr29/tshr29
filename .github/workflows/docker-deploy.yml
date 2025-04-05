@@ -16,7 +16,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1 # Prépare l'environnement Docker pour la construction
 
-      - name: Log in to GitHub Container Registry
+      - name: Log in to GitHub Container Registryd
         uses: docker/login-action@v2
         with:
           registry: ghcr.io # Registre GitHub Container Registry
