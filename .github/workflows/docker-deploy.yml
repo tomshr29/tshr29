@@ -62,7 +62,7 @@ jobs:
               -p 3333:3333 \
               -e TZ=UTC \
               -e PORT=3333 \
-              -e HOST=localhost \
+              -e HOST=0.0.0.0 \
               -e LOG_LEVEL=info \
               -e APP_KEY=FVd3NZ2lhTv_mnbwmqSw6Lu9sQzsIEpf \
               -e NODE_ENV=production \
