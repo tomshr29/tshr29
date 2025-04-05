@@ -1,39 +1,43 @@
-name: Deploy to Server
+name: Build and Deploy Docker Image
 
 on:
   push:
     branches:
-      - main # Change si ta branche principale a un autre nom
+      - main # Déclenche l'action sur un push vers la branche main
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest # Utilise Ubuntu comme environnement de build
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2 # Vérifie le code source du repo
 
-      - name: Set up Docker
-        uses: docker/setup-buildx-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1 # Prépare l'environnement Docker pour la construction
 
-      - name: Deploy to VPS via SSH
-        uses: appleboy/ssh-action@v1.0.0
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
         with:
-          host: 188.245.240.223.sslip.io # Ton IP ou domaine
-          username: root # Utilisateur SSH
-          key: ${{ secrets.SERVER_SSH_KEY }}
+          registry: ghcr.io # Registre GitHub Container Registry
+          username: tomshr29 # Ton nom d'utilisateur GitHub
+          password: ${{ secrets.GITHUB_TOKEN }} # Token GitHub pour l'authentification
+
+      - name: Build the Docker image
+        run: |
+          docker build -t ghcr.io/${{ github.repository }}:latest .  # Construction de l'image Docker
+
+      - name: Push the Docker image to GitHub Container Registry
+        run: |
+          docker push ghcr.io/${{ github.repository }}:latest  # Pousse l'image construite sur le registre
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v0.1.6 # Action pour déployer sur le serveur via SSH
+        with:
+          host: ${{ secrets.SERVER_IP }} # L'IP de ton serveur
+          username: ${{ secrets.SERVER_USER }} # L'utilisateur pour SSH (ex: root)
+          key: ${{ secrets.SERVER_SSH_KEY }} # La clé privée SSH stockée dans les secrets GitHub
           script: |
-            # Se rendre dans le répertoire où cloner ou mettre à jour le projet
-            cd /home/ubuntu  # ou le répertoire où tu veux cloner ton projet
-            # Cloner ou mettre à jour le code sur le serveur
-            if [ ! -d "t29" ]; then
-              git clone https://github.com/t29/t29.git  # Cloner le projet si ce n'est pas déjà fait
-            else
-              cd t29
-              git pull origin main  # Mettre à jour le projet si déjà cloné
-            fi
-            # Accéder au répertoire du projet
-            cd /home/ubuntu/t29  # Assure-toi que c'est le bon chemin vers ton projet
-            # Reconstruire et redémarrer les conteneurs Docker
-            docker compose down
-            docker compose up -d --build
+            docker pull ghcr.io/${{ github.repository }}:latest  # Récupère la dernière image depuis GitHub
+            docker-compose down  # Arrête les conteneurs en cours
+            docker-compose up -d --build  # Redémarre les conteneurs en arrière-plan après le rebuild
