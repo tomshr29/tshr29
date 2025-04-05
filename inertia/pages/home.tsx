@@ -5,7 +5,7 @@ export default function Home() {
     <>
       <Head title="Tom Scherer" />
 
-      <h1 className="text-3xl font-bold underline">Todm Scherer Page 2</h1>
+      <h1 className="text-3xl font-bold underline">This is HomePage</h1>
     </>
   )
 }
