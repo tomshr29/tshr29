@@ -38,19 +38,12 @@ jobs:
           username: root # L'utilisateur pour SSH (ex: root)
           key: ${{ secrets.SERVER_SSH_KEY }} # La clé privée SSH stockée dans les secrets GitHub
           script: |
-            # Installer Docker Compose sur le serveur (si nécessaire)
-            if ! command -v docker-compose &> /dev/null
-            then
-                echo "Docker Compose could not be found. Installing..."
-                curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-                chmod +x /usr/local/bin/docker-compose
-            fi
-
             # Pull la dernière image Docker
             docker pull ghcr.io/tomshr29/t29:latest
 
-            # Arrêter les conteneurs en cours
-            docker-compose down
+            # Arrêter et supprimer les conteneurs existants si besoin
+            docker stop my_container || true
+            docker rm my_container || true
 
-            # Rebuild et redémarre les conteneurs
-            docker-compose up -d --build
+            # Démarrer le conteneur avec la nouvelle image
+            docker run -d --name my_container -p 3333:3333 ghcr.io/tomshr29/t29:latest
