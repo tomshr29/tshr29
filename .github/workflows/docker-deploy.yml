@@ -21,7 +21,7 @@ jobs:
         with:
           host: 188.245.240.223.sslip.io # Ton IP ou domaine
           username: root # Utilisateur SSH
-          key: b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZWQyNTUxOQAAACD47oMWqhkVvTbA6whaqRBeEzsIsHB+KxK5HBkijdtb3wAAAJixCr1nsQq9ZwAAAAtzc2gtZWQyNTUxOQAAACD47oMWqhkVvTbA6whaqRBeEzsIsHB+KxK5HBkijdtb3wAAAECKki0TojiOtF6ye/6q6vyDRU1JyKQNKpg/ykgok/JpN/jugxaqGRW9NsDrCFqpEF4TOwiwcH4rErkcGSKN21vfAAAAD3RvbS5zY2hlcmVyQHQyOQECAwQFBg== # Clé privée SSH stockée dans les secrets GitHub
+          key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             # Se rendre dans le répertoire où cloner ou mettre à jour le projet
             cd /home/ubuntu  # ou le répertoire où tu veux cloner ton projet
