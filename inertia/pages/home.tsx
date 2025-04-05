@@ -4,8 +4,8 @@ export default function Home() {
   return (
     <>
       <Head title="Tom Scherer" />
- 
-      <h1 className="text-3xl font-bold underline">Tom Scherer Page 2</h1>
+
+      <h1 className="text-3xl font-bold underline">Todm Scherer Page 2</h1>
     </>
   )
 }
