@@ -21,7 +21,7 @@ jobs:
         with:
           registry: ghcr.io # Registre GitHub Container Registry
           username: tomshr29 # Ton nom d'utilisateur GitHub
-          password: ${{ secrets.GITHUB_TOKEN }} # Token GitHub pour l'authentification
+          password: ${{ secrets.TOKEN_TOK }} # Token GitHub pour l'authentification
 
       - name: Build the Docker image
         run: |
