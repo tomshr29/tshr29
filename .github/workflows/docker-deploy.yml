@@ -57,4 +57,14 @@ jobs:
 
             # Démarrer le conteneur avec la nouvelle image sur le même port
             echo "Démarrage du nouveau conteneur sur le port 3333..."
-            docker run -d --name my_container -p 3333:3333 ghcr.io/tomshr29/t29:latest
+            docker run -d \
+              --name my_container \
+              -p 3333:3333 \
+              -e TZ=UTC \
+              -e PORT=3333 \
+              -e HOST=localhost \
+              -e LOG_LEVEL=info \
+              -e APP_KEY=FVd3NZ2lhTv_mnbwmqSw6Lu9sQzsIEpf \
+              -e NODE_ENV=development \
+              -e SESSION_DRIVER=cookie \
+              ghcr.io/tomshr29/t29:latest
