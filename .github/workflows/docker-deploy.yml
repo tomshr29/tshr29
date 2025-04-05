@@ -25,17 +25,17 @@ jobs:
 
       - name: Build the Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository }}:latest .  # Construction de l'image Docker
+          docker build -t ghcr.io/${{ github.repository | toLowerCase }}:latest .  # Construction de l'image Docker
 
       - name: Push the Docker image to GitHub Container Registry
         run: |
-          docker push ghcr.io/${{ github.repository }}:latest  # Pousse l'image construite sur le registre
+          docker push ghcr.io/${{ github.repository | toLowerCase }}:latest  # Pousse l'image construite sur le registre
 
       - name: Deploy to server
         uses: appleboy/ssh-action@v0.1.6 # Action pour déployer sur le serveur via SSH
         with:
           host: ${{ secrets.SERVER_IP }} # L'IP de ton serveur
-          username: ${{ secrets.SERVER_USER }} # L'utilisateur pour SSH (ex: root)
+          username: root # L'utilisateur pour SSH (ex: root)
           key: ${{ secrets.SERVER_SSH_KEY }} # La clé privée SSH stockée dans les secrets GitHub
           script: |
             docker pull ghcr.io/${{ github.repository }}:latest  # Récupère la dernière image depuis GitHub
