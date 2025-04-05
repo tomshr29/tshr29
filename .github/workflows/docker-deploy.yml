@@ -38,6 +38,6 @@ jobs:
           username: root # L'utilisateur pour SSH (ex: root)
           key: ${{ secrets.SERVER_SSH_KEY }} # La clé privée SSH stockée dans les secrets GitHub
           script: |
-            docker pull ghcr.io/${{ github.repository }}:latest  # Récupère la dernière image depuis GitHub
+            docker pull ghcr.io/tomshr29/t29:latest  # Récupère la dernière image depuis GitHub
             docker-compose down  # Arrête les conteneurs en cours
             docker-compose up -d --build  # Redémarre les conteneurs en arrière-plan après le rebuild
