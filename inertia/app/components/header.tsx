@@ -1,4 +1,5 @@
 import { Link } from '@inertiajs/react'
+import Logo from '../../../resources/assets/T29.png'
 
 export default function Header() {
   return (
@@ -6,11 +7,7 @@ export default function Header() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         <div className="flex lg:flex-1">
           <Link href="#" className="-m-1.5 p-1.5">
-            <img
-              alt=""
-              src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-              className="h-8 w-auto"
-            />
+            <img alt="" src={Logo} className="h-8 w-auto" />
           </Link>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
