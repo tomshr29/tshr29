@@ -1,5 +1,8 @@
 import { Link } from '@inertiajs/react'
 import Image from '../../resources/assets/tom.scherer.jpg'
+import { useState } from 'react'
+import { Menu, X } from 'lucide-react'
+import { Dialog, DialogPanel } from '@headlessui/react'
 
 export default function Home() {
   return <Hero />
@@ -7,7 +10,8 @@ export default function Home() {
 
 function Hero() {
   return (
-    <div className="bg-[linear-gradient(to_bottom,_#000,_#151515)] antialiased">
+    <div className="relative h-full w-full bg-neutral-950">
+      <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:150px_150px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
       <div className="mb-20 overflow-hidden sm:mb-32 md:mb-40">
         <div className="px-4 sm:px-6 md:px-8">
           <Header />
@@ -115,7 +119,7 @@ function Hero() {
                 projet. Venez découvrir une nouvelle manière d’aborder le web.
               </p>
             </blockquote>
-            <figcaption className="mt-6 flex items-center justify-center space-x-4 text-left">
+            <figcaption className="mt-6 flex items-center justify-center space-x-4 text-left z-20">
               <img src={Image} alt="" className="w-14 h-14 rounded-full" />
               <div>
                 <div className="text-slate-100 font-semibold">Tom Scherer</div>
@@ -136,7 +140,7 @@ function Hero() {
   )
 }
 
-const Navigation = [
+const navigation = [
   { name: 'Documentation' },
   { name: 'Composants' },
   { name: 'Blog' },
@@ -144,13 +148,15 @@ const Navigation = [
 ]
 
 function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
   return (
     <div className="relative pt-6 lg:pt-8 flex items-center justify-between text-slate-200 font-medium text-base scale-y-95 leading-6">
       <Logo />
       <div className="flex items-center">
         <nav>
-          <ul className="flex items-center gap-x-8">
-            {Navigation.map((item) => (
+          <ul className="lg:flex hidden items-center gap-x-8">
+            {navigation.map((item) => (
               <li key={item.name}>
                 <Link href="#" className="hover:text-sky-500">
                   {item.name}
@@ -159,6 +165,47 @@ function Header() {
             ))}
           </ul>
         </nav>
+        <div className="fle lg:hidden">
+          <button
+            type="button"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <Menu className="h-6 w-6" />
+          </button>
+        </div>
+        <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
+          <div className="fixed inset-0 z-50" />
+          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-neutral-950 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            <div className="flex items-center justify-between">
+              <a href="#" className="-m-1.5 p-1.5">
+                <Logo />
+              </a>
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(false)}
+                className="-m-2.5 rounded-md p-2.5 text-neutral-200"
+              >
+                <span className="sr-only">Close menu</span>
+                <X aria-hidden="true" className="size-6" />
+              </button>
+            </div>
+            <div className="mt-6 flow-root">
+              <div className="-my-6 divide-y divide-gray-500/10">
+                <div className="space-y-2 py-6">
+                  {navigation.map((item) => (
+                    <a
+                      key={item.name}
+                      className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-200 hover:bg-gray-50"
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </DialogPanel>
+        </Dialog>
       </div>
     </div>
   )
