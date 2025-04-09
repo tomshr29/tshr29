@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 
+import Header from '~/app/components/header'
+
 export default function Home() {
   return <Hero />
 }
@@ -66,7 +68,7 @@ const navigation = [
   { name: 'Contact', href: '/contact' },
 ]
 
-function Header() {
+export function Headedr() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
