@@ -1,3 +1,4 @@
+import ReactLenis from 'lenis/react'
 import Header from './header'
 
 interface Props {
@@ -8,9 +9,9 @@ export function Layout(props: Props) {
   const { children } = props
 
   return (
-    <main>
+    <ReactLenis root>
       <Header />
       <div className="">{children}</div>
-    </main>
+    </ReactLenis>
   )
 }

@@ -1,16 +1,47 @@
 import { Link } from '@inertiajs/react'
 import Image from '../../resources/assets/tom.scherer.jpg'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { Dialog, DialogPanel } from '@headlessui/react'
-
 import Header from '~/app/components/header'
+import { ReactLenis } from 'lenis/react'
+import SplitType from 'split-type'
+import { gsap } from 'gsap/dist/gsap'
+import { useGSAP } from '@gsap/react/dist'
+
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 export default function Home() {
   return <Hero />
 }
 
 function Hero() {
+  const textRef = useRef<HTMLHeadingElement>(null)
+
+  useEffect(() => {
+    const split = new SplitType(textRef.current!, { types: 'chars' })
+    gsap.fromTo(
+      split.chars,
+      {
+        color: 'gray',
+      },
+      {
+        color: 'red', // Valeur finale (couleur)
+        duration: 0.3,
+        stagger: 0.02, // Espacement entre les caractères
+        scrollTrigger: {
+          trigger: textRef.current, // Déclenche l'animation sur l'élément
+          start: 'top 60%', // Commence quand l'élément est à 80% du viewport
+          end: 'top 20%', // Se termine quand l'élément est à 20% du viewport
+          scrub: true, // L'animation suit le défilement de la page
+          markers: false, // Désactive les marqueurs de débogage
+          toggleActions: 'play reverse play reverse', // Action inversée au scroll vers le haut
+        },
+      }
+    )
+  }, [])
   return (
     <div className="relative h-full w-full bg-neutral-950">
       <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:150px_150px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
@@ -18,13 +49,15 @@ function Hero() {
         <div className="px-4 sm:px-6 md:px-8">
           <Header />
           <div className="relative max-w-5xl mx-auto pt-20 sm:pt-24 lg:pt-32">
-            <h1 className="text-slate-100 font-medium text-5xl sm:text-6xl lg:text-7xl tracking-tight text-center scale-y-95">
-              Développez rapidement vos projets avec T29.
+            <h1 className="text-slate-100 text-7xl sm:text-8xl lg:text-9xl font-semibold tracking-tighter text-center scale-y-95">
+              Designons votre futur avec T29
             </h1>
-            <p className="mt-6 text-lg text-slate-200 text-center max-w-3xl mx-auto scale-y-95">
-              T29 vous propose des solutions sur mesure en combinant performance, design et
-              accessibilité. Gagnez du temps avec notre expertise en développement moderne.
-            </p>
+            <div ref={textRef} className="text-4xl font-bold text-center mt-20">
+              <p>
+                Continue scrolling to see the text animation in action. This demo integrates
+                scroll-based animations with smooth scrolling!
+              </p>
+            </div>
             <div className="mt-6 sm:mt-10 flex justify-center space-x-6 text-sm"></div>
           </div>
         </div>

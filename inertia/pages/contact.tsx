@@ -1,8 +1,31 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useForm } from '@inertiajs/react'
+import { GoogleReCaptchaProvider, GoogleReCaptchaCheckbox } from '@google-recaptcha/react'
+import { useState } from 'react'
 
 export default function Contact() {
-  const [budget, setBudget] = useState(1000)
+  const { data, setData, post, processing, errors } = useForm({
+    name: '',
+    email: '',
+    message: '',
+  })
+
+  const [captchaStatus, setCaptchaStatus] = useState(false)
+  const [key, setKey] = useState('')
+  const onChange = (key: any) => {
+    setKey(key)
+    setCaptchaStatus(true)
+  }
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault()
+
+    post('/contact', {
+      onSuccess: () => {
+        setData({ name: '', email: '', message: '' })
+      },
+    })
+  }
 
   return (
     <>
@@ -11,61 +34,54 @@ export default function Contact() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="w-full max-w-2xl  space-y-8"
+          className="w-full max-w-2xl space-y-8"
         >
           <h1 className="text-4xl font-bold text-white tracking-tight">Get in Touch</h1>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={submit}>
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-1">Name</label>
               <input
                 type="text"
+                value={data.name}
+                onChange={(e) => setData('name', e.target.value)}
                 placeholder="Your Name"
                 className="w-full px-4 py-3 bg-slate-800 text-white border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
               />
+              {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
             </div>
-
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-1">Email</label>
               <input
                 type="email"
+                value={data.email}
+                onChange={(e) => setData('email', e.target.value)}
                 placeholder="you@example.com"
                 className="w-full px-4 py-3 bg-slate-800 text-white border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
               />
+              {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
             </div>
-
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-1">Message</label>
               <textarea
                 placeholder="Your message..."
-                rows="4"
+                rows={4}
+                value={data.message}
+                onChange={(e) => setData('message', e.target.value)}
                 className="w-full px-4 py-3 bg-slate-800 text-white border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
               ></textarea>
+              {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
-                Budget: <span className="text-cyan-400 font-mono">${budget.toLocaleString()}</span>
-              </label>
-              <input
-                type="range"
-                min="0"
-                max="10000"
-                step="100"
-                value={budget}
-                onChange={(e) => setBudget(Number(e.target.value))}
-                className="w-full accent-cyan-500"
-              />
-            </div>
-
-            <div className="flex items-center gap-3">
-              <input type="checkbox" id="updates" className="accent-cyan-500" />
-              <label htmlFor="updates" className="text-sm text-slate-400">
-                Send me occasional updates
-              </label>
-            </div>
+            <GoogleReCaptchaProvider
+              type="v2-checkbox"
+              siteKey="6LdEVxQrAAAAAK0tgXgI9Nednm9_S2ev0k-8D12A"
+            >
+              <GoogleReCaptchaCheckbox onChange={onChange} />
+            </GoogleReCaptchaProvider>
 
             <button
               type="submit"
+              disabled={processing}
               className="w-full py-3 bg-cyan-500 text-white font-semibold hover:bg-cyan-600 transition duration-300"
             >
               Send Message
