@@ -29,45 +29,48 @@ export default function Contact() {
 
   return (
     <>
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6">
+      <div className="min-h-screen bg-neutral-950 flex items-center justify-center p-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="w-full max-w-2xl space-y-8"
         >
-          <h1 className="text-4xl font-bold text-white tracking-tight">Get in Touch</h1>
+          <h1 className="text-4xl text-white tracking-tight antialiased italic font-medium">
+            Envoyez-nous un message,
+          </h1>
           <form className="space-y-6" onSubmit={submit}>
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1">Name</label>
+              <label className="block font-medium antialiased scale-y-95 text-white mb-1">
+                Nom
+              </label>
               <input
                 type="text"
                 value={data.name}
                 onChange={(e) => setData('name', e.target.value)}
-                placeholder="Your Name"
-                className="w-full px-4 py-3 bg-slate-800 text-white border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
               />
               {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1">Email</label>
+              <label className="block font-medium antialiased scale-y-95 text-white mb-1">
+                Email
+              </label>
               <input
                 type="email"
                 value={data.email}
                 onChange={(e) => setData('email', e.target.value)}
-                placeholder="you@example.com"
-                className="w-full px-4 py-3 bg-slate-800 text-white border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                placeholder=""
               />
               {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1">Message</label>
+              <label className="block font-medium antialiased scale-y-95 text-white mb-1">
+                Message
+              </label>
               <textarea
-                placeholder="Your message..."
                 rows={4}
                 value={data.message}
                 onChange={(e) => setData('message', e.target.value)}
-                className="w-full px-4 py-3 bg-slate-800 text-white border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
               ></textarea>
               {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
             </div>
@@ -84,7 +87,7 @@ export default function Contact() {
               disabled={processing}
               className="w-full py-3 bg-cyan-500 text-white font-semibold hover:bg-cyan-600 transition duration-300"
             >
-              Send Message
+              Envoyer le message
             </button>
           </form>
         </motion.div>
