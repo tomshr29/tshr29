@@ -67,4 +67,9 @@ jobs:
               -e APP_KEY=FVd3NZ2lhTv_mnbwmqSw6Lu9sQzsIEpf \
               -e NODE_ENV=production \
               -e SESSION_DRIVER=cookie \
+              -e SMTP_HOST=in-v3.mailjet.com
+              -e SMTP_PORT=587
+              -e SMTP_USERNAME=f6174097f3636bbc2797fe7719de7373
+              -e SMTP_PASSWORD=c6546c296209bd33086922a0ca2fd613
+              -e LIMITER_STORE=database
               ghcr.io/tomshr29/t29:latest
