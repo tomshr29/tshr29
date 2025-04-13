@@ -14,11 +14,6 @@ const mailConfig = defineConfig({
       host: env.get('SMTP_HOST'),
       port: env.get('SMTP_PORT'),
 
-      auth: {
-        user: env.get('SMTP_USERNAME'),
-        pass: env.get('SMTP_PASSWORD'),
-      },
-
       /**
        * Uncomment the auth block if your SMTP
        * server needs authentication
