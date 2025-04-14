@@ -5,7 +5,7 @@ import { gsap } from 'gsap/dist/gsap'
 import { useGSAP } from '@gsap/react/dist'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import Services from '../app/components/Services'
-import { Link } from '@inertiajs/react'
+import { Head, Link } from '@inertiajs/react'
 import Faqs from '~/sections/Faqs'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
@@ -41,7 +41,15 @@ function Hero() {
   }, [])
 
   return (
-    <main>
+    <>
+      <Head>
+        <title>Accueil</title>
+        <meta
+          name="description"
+          content="Bienvenue sur notre site. Découvrez nos services, notre expertise, et prenez contact facilement."
+        />
+      </Head>
+
       <div className="h-screen border-b border-neutral-100 bg-white flex flex-col items-center justify-center overflow-hidden text-center px-6">
         <h1 className="text-slate-900 whitespace-nowrap text-[30vw] font-bold tracking-tighter scale-y-95 italic leading-none">
           Tshr29
@@ -105,6 +113,6 @@ function Hero() {
           </div>
         </div>
       </footer>
-    </main>
+    </>
   )
 }

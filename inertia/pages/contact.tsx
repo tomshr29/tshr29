@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useForm } from '@inertiajs/react'
+import { Head, useForm } from '@inertiajs/react'
 import { GoogleReCaptchaProvider, GoogleReCaptchaCheckbox } from '@google-recaptcha/react'
 import { useState } from 'react'
 
@@ -29,6 +29,14 @@ export default function Contact() {
 
   return (
     <>
+      <Head>
+        <title>Contact</title>
+        <meta
+          name="description"
+          content="Prenez contact avec notre équipe pour toute demande d'information, devis ou support."
+        />
+      </Head>
+
       <div className="min-h-screen bg-neutral-950 flex items-center justify-center p-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
