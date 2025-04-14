@@ -7,7 +7,7 @@ import { createInertiaApp } from '@inertiajs/react'
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
 import { Layout } from './components/layout'
 
-import.meta.glob(['./assets/**'])
+import.meta.glob(['../../resources/assets/**'])
 
 const appName = import.meta.env.VITE_APP_NAME || 'T29'
 
