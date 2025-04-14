@@ -8,9 +8,10 @@
 
   <meta property="og:type" content="website">
   
+  <link rel="icon" href="{{ asset('resources/assets/t29.png') }}" type="image/png">
 
   @viteReactRefresh()
-  @inertiaHead()
+  @inertiaHead()  
   @vite(['inertia/app/app.tsx', `inertia/pages/${page.component}.tsx`])
 
   <script defer data-domain="188.245.240.223.sslip.io" src="https://plausible.188.245.240.223.sslip.io/js/script.js"></script>
