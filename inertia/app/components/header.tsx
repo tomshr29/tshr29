@@ -16,7 +16,6 @@ export default function Header() {
             </h1>
           </Link>
         </div>
-        <span>Sarreguemines, FR</span>
         <button onClick={() => setIsOpen(true)} className="text-black">
           <Menu className="w-8 h-8" />
         </button>
@@ -33,13 +32,23 @@ export default function Header() {
           </div>
 
           {/* Content */}
-          <div className="flex-grow flex items-center justify-center">
+          <div className="flex-grow flex items-center justify-center -mt-14">
             <DialogPanel className="text-white text-center space-y-6">
-              <DialogTitle className="text-3xl font-bold">Menu</DialogTitle>
-              <nav className="flex flex-col gap-4 text-lg">
-                <a href="#">Accueil</a>
-                <a href="#">À propos</a>
-                <a href="#">Contact</a>
+              <nav className="flex flex-col text-lg -space-y-20">
+                <Link
+                  href="/"
+                  onClick={() => setIsOpen(false)}
+                  className="text-[15vw] font-bold tracking-tighter scale-y-95"
+                >
+                  Accueil
+                </Link>
+                <Link
+                  href="/contact"
+                  onClick={() => setIsOpen(false)}
+                  className="text-[15vw] font-bold tracking-tighter scale-y-95"
+                >
+                  Contact
+                </Link>
               </nav>
             </DialogPanel>
           </div>

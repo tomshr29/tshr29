@@ -6,6 +6,7 @@ import { useGSAP } from '@gsap/react/dist'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import Services from '../app/components/Services'
 import { Link } from '@inertiajs/react'
+import Faqs from '~/sections/Faqs'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -41,7 +42,7 @@ function Hero() {
 
   return (
     <main>
-      <div className="h-screen bg-white flex flex-col items-center justify-center overflow-hidden text-center px-6">
+      <div className="h-screen border-b border-neutral-100 bg-white flex flex-col items-center justify-center overflow-hidden text-center px-6">
         <h1 className="text-slate-900 whitespace-nowrap text-[30vw] font-bold tracking-tighter scale-y-95 italic leading-none">
           Tshr29
         </h1>
@@ -63,9 +64,10 @@ function Hero() {
           </Link>
         </div>
       </div>
-      0203fd
+
       <Services />
-      <section className="text-center px-8 py-20">
+      <Faqs />
+      <section className="text-center px-8 py-20 border-b border-neutral-100">
         <h2 className="text-neutral-900 text-4xl tracking-tighter italic scale-y-90 font-medium sm:text-5xl">
           Qui suis-je ?
         </h2>
@@ -88,10 +90,19 @@ function Hero() {
         </figure>
       </section>
       <footer className="py-16 text-sm leading-6  text-center">
-        <div className="max-w-4xl mx-auto divide-y divide-slate-200 px-4 sm:px-6 md:px-8">
+        <div className="mx-auto px-4 sm:px-6 md:px-8">
           <h1 className="text-neutral-900 text-4xl mb-10 tracking-tighter italic scale-y-90 font-medium sm:text-5xl">
             Intéressé à travailler ensemble ou simplement à en savoir plus ?
           </h1>
+          <div className="mt-10 sm:mt-12">
+            <Link href="/contact">
+              <button className="relative inline-block px-12 py-6 text-white font-bold bg-gradient-to-br from-blue-600 via-sky-500 to-cyan-400 shadow-lg shadow-cyan-500/40 skew-x-[-12deg] hover:scale-110 hover:rotate-6 transform transition-all duration-300 tracking-wider rounded-xl">
+                <h1 className="inline-block skew-x-[12deg] text-white text-lg tracking-tighter italic scale-y-90 font-medium sm:text-5xl">
+                  Contactez-moi
+                </h1>
+              </button>
+            </Link>
+          </div>
         </div>
       </footer>
     </main>

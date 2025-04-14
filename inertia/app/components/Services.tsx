@@ -26,7 +26,7 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <section className="w-full py-24 px-6">
+    <section className="w-full py-24 px-6 border-b border-neutral-100">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-neutral-900 text-4xl mb-10 tracking-tighter italic scale-y-90 font-medium sm:text-5xl">
           Nous créons des applications web et applications mobiles,
