@@ -46,7 +46,7 @@ function Hero() {
         <title>Accueil</title>
         <meta
           name="description"
-          content="Bienvenue sur notre site. Découvrez nos services, notre expertise, et prenez contact facilement."
+          content="Bienvenude sur notre site. Découvrez nos services, notre expertise, et prenez contact facilement."
         />
       </Head>
 
