@@ -13,7 +13,7 @@ export default class ContactController {
     try {
       await mail.send((m) => {
         m.to('tomscherer29@gmail.com')
-          .from('scherertomofficial@gmail.com')
+          .from('contact@tshr29.com')
           .replyTo(email)
           .subject('Information de contact')
           .htmlView('emails/verify_email', { name, email, message })
