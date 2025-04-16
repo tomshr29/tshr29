@@ -3,73 +3,42 @@ name: Build and Deploy Docker Image
 on:
   push:
     branches:
-      - main # Déclenche l'action sur un push vers la branche main
+      - main
 
 jobs:
   build:
-    runs-on: ubuntu-latest # Utilise Ubuntu comme environnement de build
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2 # Vérifie le code source du repo
+        uses: actions/checkout@v2
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1 # Prépare l'environnement Docker pour la construction
+        uses: docker/setup-buildx-action@v1
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
         with:
-          registry: ghcr.io # Registre GitHub Container Registry
-          username: tomshr29 # Ton nom d'utilisateur GitHub
-          password: ${{ secrets.TOKEN_TOK }} # Token GitHub pour l'authentification
+          registry: ghcr.io
+          username: tomshr29
+          password: ${{ secrets.TOKEN_TOK }}
 
       - name: Build the Docker image
         run: |
-          docker build -t ghcr.io/tomshr29/t29:latest .  # Construction de l'image Docker
+          docker build -t ghcr.io/tomshr29/t29:latest .
 
       - name: Push the Docker image to GitHub Container Registry
         run: |
-          docker push ghcr.io/tomshr29/t29:latest  # Pousse l'image construite sur le registre
+          docker push ghcr.io/tomshr29/t29:latest
 
       - name: Deploy to server
-        uses: appleboy/ssh-action@v0.1.6 # Action pour déployer sur le serveur via SSH
+        uses: appleboy/ssh-action@v0.1.6
         with:
-          host: ${{ secrets.SERVER_IP }} # L'IP de ton serveur
-          username: root # L'utilisateur pour SSH (ex: root)
-          key: ${{ secrets.SERVER_SSH_KEY }} # La clé privée SSH stockée dans les secrets GitHub
+          host: ${{ secrets.SERVER_IP }}
+          username: root
+          key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            # Pull la dernière image Docker
-            docker pull ghcr.io/tomshr29/t29:latest
-
-            # Arrêter et supprimer les conteneurs existants si besoin
-            echo "Arrêt et suppression du conteneur existant..."
-            docker stop my_container || true  # Si le conteneur existe, on l'arrête
-            docker rm my_container || true  # On le supprime s'il existe
-
-            # Vérifier s'il y a un autre conteneur utilisant le port 3333 et le supprimer
-            echo "Vérification du port 3333..."
-            CONTAINER_ID=$(docker ps -q -f "publish=3333")
-            if [ -n "$CONTAINER_ID" ]; then
-                echo "Un autre conteneur utilise déjà le port 3333. Suppression..."
-                docker stop $CONTAINER_ID
-                docker rm $CONTAINER_ID
-            fi
-
-            # Démarrer le conteneur avec la nouvelle image sur le même port
-            echo "Démarrage du nouveau conteneur sur le port 3333..."
             docker run -d \
               --name my_container \
               -p 3333:3333 \
-              -e TZ=UTC \
-              -e PORT=3333 \
-              -e HOST=0.0.0.0 \
-              -e LOG_LEVEL=info \
-              -e APP_KEY=FVd3NZ2lhTv_mnbwmqSw6Lu9sQzsIEpf \
-              -e NODE_ENV=production \
-              -e SESSION_DRIVER=cookie \
-              -e SMTP_HOST=in-v3.mailjet.com \
-              -e SMTP_PORT=587 \
-              -e SMTP_USERNAME=f6174097f3636bbc2797fe7719de7373 \
-              -e SMTP_PASSWORD=c6546c296209bd33086922a0ca2fd613 \
-              -e LIMITER_STORE=database \
               ghcr.io/tomshr29/t29:latest
