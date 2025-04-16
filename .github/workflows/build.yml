@@ -6,9 +6,9 @@ on:
       - main
 
 env:
-  REGISTRY: ghcr.io # GitHub Container Registry
+  REGISTRY: ghcr.io
   IMAGE_NAME: tomshr29/t29
-  IMAGE_TAG: latest # Tag pour l'image Docker
+  IMAGE_TAG: latest
 
 jobs:
   build:
@@ -22,8 +22,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
-          username: tomshr29 # Nom d'utilisateur GitHub
-          password: ${{ secrets.TOKEN_TOK }} # Utilisation du token GitHub
+          username: tomshr29
+          password: ${{ secrets.TOKEN_TOK }}
 
       - name: Build Docker image
         run: |
@@ -36,28 +36,30 @@ jobs:
       - name: Deploy to server via SSH
         uses: appleboy/ssh-action@v0.1.7
         with:
-          host: ${{ secrets.SERVER_IP }} # L'IP de ton serveur
-          username: ${{ secrets.SERVER_USER }} # Utilisateur pour SSH
-          key: ${{ secrets.SERVER_SSH_KEY }} # Clé SSH privée pour se connecter au serveur
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
+            echo "Connexion SSH OK !"
+
             # Pull de la dernière image Docker
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
             # Arrêter et supprimer le conteneur existant si besoin
             echo "Arrêt et suppression du conteneur existant..."
-            docker stop my_container || true  # Si le conteneur existe, on l'arrête
-            docker rm my_container || true  # On le supprime s'il existe
+            docker stop my_container || true
+            docker rm my_container || true
 
-            # Vérifier s'il y a un autre conteneur utilisant le port 3333 et le supprimer
+            # Vérifier si le port 3333 est utilisé
             echo "Vérification du port 3333..."
             CONTAINER_ID=$(docker ps -q -f "publish=3333")
             if [ -n "$CONTAINER_ID" ]; then
-                echo "Un autre conteneur utilise déjà le port 3333. Suppression..."
-                docker stop $CONTAINER_ID
-                docker rm $CONTAINER_ID
+              echo "Un autre conteneur utilise déjà le port 3333. Suppression..."
+              docker stop $CONTAINER_ID
+              docker rm $CONTAINER_ID
             fi
 
-            # Démarrer le conteneur avec la nouvelle image sur le même port
+            # Démarrage du nouveau conteneur
             echo "Démarrage du nouveau conteneur sur le port 3333..."
             docker run -d \
               --name my_container \
