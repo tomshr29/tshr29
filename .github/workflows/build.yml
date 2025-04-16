@@ -22,8 +22,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }} # Utilisation du token GitHub
+          username: tomshr29 # Nom d'utilisateur GitHub
+          password: ${{ secrets.TOKEN_TOK }} # Utilisation du token GitHub
 
       - name: Build Docker image
         run: |
