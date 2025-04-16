@@ -8,6 +8,6 @@
   }
   input,
   textarea {
-    @apply bg-neutral-250 text-white border border-neutral-800 w-full px-4 py-3 rounded;
+    @apply bg-neutral-200 text-white border border-neutral-800 w-full px-4 py-3 rounded;
   }
 }
