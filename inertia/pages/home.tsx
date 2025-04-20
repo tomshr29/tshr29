@@ -51,8 +51,8 @@ function Hero() {
       </Head>
 
       <div className="h-screen border-b border-neutral-100 bg-white flex flex-col items-center justify-center overflow-hidden text-center px-6">
-        <h1 className="text-slate-900 whitespace-nowrap text-[30vw] font-bold tracking-tighter scale-y-95 italic leading-none">
-          Tshr29-29
+        <h1 className="text-slate-900 whitespace-nowrap text-[10vw] font-bold tracking-tighter scale-y-95 italic leading-none">
+          Tshr29
         </h1>
 
         <div className="max-w-xl">

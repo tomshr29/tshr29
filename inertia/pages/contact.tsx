@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion'
 import { Head, useForm } from '@inertiajs/react'
-import { GoogleReCaptchaProvider, GoogleReCaptchaCheckbox } from '@google-recaptcha/react'
-import { useState } from 'react'
 
 export default function Contact() {
   const { data, setData, post, processing, errors } = useForm({
@@ -9,13 +7,6 @@ export default function Contact() {
     email: '',
     message: '',
   })
-
-  const [captchaStatus, setCaptchaStatus] = useState(false)
-  const [key, setKey] = useState('')
-  const onChange = (key: any) => {
-    setKey(key)
-    setCaptchaStatus(true)
-  }
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -37,19 +28,19 @@ export default function Contact() {
         />
       </Head>
 
-      <div className="min-h-screen bg-neutral-950 flex items-center justify-center p-6">
+      <div className="min-h-screen flex items-center justify-center p-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="w-full max-w-2xl space-y-8"
         >
-          <h1 className="text-4xl text-white tracking-tight antialiased italic font-medium">
+          <h1 className="text-4xl text-neutral-950 tracking-tight antialiased italic font-semibold">
             Envoyez-nous un message,
           </h1>
           <form className="space-y-6" onSubmit={submit}>
             <div>
-              <label className="block font-medium antialiased scale-y-95 text-white mb-1">
+              <label className="block font-medium antialiased scale-y-95 text-neutral-950 mb-1">
                 Nom
               </label>
               <input
@@ -60,7 +51,7 @@ export default function Contact() {
               {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
             </div>
             <div>
-              <label className="block font-medium antialiased scale-y-95 text-white mb-1">
+              <label className="block font-medium antialiased scale-y-95 text-neutral-950 mb-1">
                 Email
               </label>
               <input
@@ -72,7 +63,7 @@ export default function Contact() {
               {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
             </div>
             <div>
-              <label className="block font-medium antialiased scale-y-95 text-white mb-1">
+              <label className="block font-medium antialiased scale-y-95 text-neutral-950 mb-1">
                 Message
               </label>
               <textarea
@@ -82,14 +73,6 @@ export default function Contact() {
               ></textarea>
               {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
             </div>
-
-            <GoogleReCaptchaProvider
-              type="v2-checkbox"
-              siteKey="6LdEVxQrAAAAAK0tgXgI9Nednm9_S2ev0k-8D12A"
-            >
-              <GoogleReCaptchaCheckbox onChange={onChange} />
-            </GoogleReCaptchaProvider>
-
             <button
               type="submit"
               disabled={processing}

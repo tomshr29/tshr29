@@ -14,6 +14,6 @@ const ContactController = () => import('#controllers/contact_controller')
 
 router.on('/').renderInertia('home')
 
-router.get('/blog', [BlogController, 'render']).as('blog.index')
-// router.get('/contact', [ContactController, 'render'])
-// router.post('/contact', [ContactController, 'sendMessage'])
+router.get('/blog', [BlogController, 'render'])
+router.get('/contact', [ContactController, 'render'])
+router.post('/contact', [ContactController, 'execute'])
