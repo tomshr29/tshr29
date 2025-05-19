@@ -1,5 +1,5 @@
 {
-  "name": "t29",
+  "name": "tshr29",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -74,7 +74,8 @@
     "@vinejs/vine": "^3.0.0",
     "clsx": "^2.1.1",
     "edge.js": "^6.2.1",
-    "gsap": "^3.12.7",
+    "gsap": "^3.13.0",
+    "keen-slider": "^6.8.6",
     "lenis": "^1.2.3",
     "lucide-react": "^0.487.0",
     "mjml": "^4.15.3",

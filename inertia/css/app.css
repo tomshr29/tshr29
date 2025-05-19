@@ -1,13 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Special+Gothic+Expanded+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import 'tailwindcss';
+@import 'keen-slider/keen-slider.min.css';
 
 @layer base {
   * {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    --webkit-font-smoothing: antialiased;
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
   input,
   textarea {
-    @apply bg-neutral-200 text-white border border-neutral-800 w-full px-4 py-3 rounded;
+    @apply bg-transparent text-neutral-950 border-b border-neutral-300 w-full px-0 pt-6 pb-2 placeholder-transparent focus:outline-none focus:border-neutral-950 transition duration-200;
   }
+}
+
+.word,
+.char,
+.line {
+  outline: 1px dashed #333;
+  border-radius: 10px;
 }

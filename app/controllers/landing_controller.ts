@@ -1,7 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
-export default class BlogController {
+export default class LandingController {
   async render({ inertia }: HttpContext) {
-    return inertia.render('blog')
+    return inertia.render('landing')
   }
 }

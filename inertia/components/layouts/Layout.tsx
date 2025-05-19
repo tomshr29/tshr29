@@ -1,6 +1,6 @@
 import ReactLenis from 'lenis/react'
-import Header from './header'
-import Footer from './Footer'
+import Header from '../partials/Header'
+import Footer from '../partials/Footer'
 
 interface Props {
   children: React.ReactNode
@@ -12,7 +12,7 @@ export function Layout(props: Props) {
   return (
     <ReactLenis root>
       <Header />
-      <>{children}</>
+      <main>{children}</main>
       <Footer />
     </ReactLenis>
   )
