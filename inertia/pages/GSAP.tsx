@@ -59,9 +59,13 @@ export default function GSAP() {
         <div className="absolute bottom-0 left-[-20%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(0,0,255,.15),rgba(255,255,255,0))]"></div>
         <div className="absolute bottom-0 right-[-20%] top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(0,0,255,.15),rgba(255,255,255,0))]"></div>
 
-        <div className="relative w-[90vw] flex flex-col items-center justify-evenly">
-          <div ref={text} className="text-8xl text-center text-white">
-            Start build your websites people remember.
+        <div className="relative w-[90vw] flex flex-col items-start justify-evenly">
+          <div
+            ref={text}
+            className="text-white text-start text-3xl sm:text-5xl md:text-7xl lg:text-8xl px-4 leading-tight tracking-tight"
+          >
+            Start build your websites dream with
+            <span className="text-blue-500">Tshr29 Studio</span>
           </div>
           <Link href="/contact" className="mt-20">
             <button className="w-full bg-neutral-200 text-neutral-900 font-medium rounded text-base px-5 py-2.5">
