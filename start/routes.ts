@@ -19,3 +19,12 @@ router.get('/', async ({ inertia }) => {
 router.get('*', async ({ inertia }) => {
   return inertia.render('errors/not_found')
 })
+
+const HealthChecksController = () => import('#controllers/health_checks_controller')
+
+router.get('/health', [HealthChecksController]).use(({ request, response }, next) => {
+  if (request.header('x-monitoring-secret') === 'some_secret_value') {
+    return next()
+  }
+  response.unauthorized({ message: 'Unauthorized access' })
+})
