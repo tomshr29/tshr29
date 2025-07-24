@@ -11,9 +11,7 @@ export function Layout(props: Props) {
 
   return (
     <ReactLenis root>
-      <Header />
       <main>{children}</main>
-      <Footer />
     </ReactLenis>
   )
 }
