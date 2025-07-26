@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react'
 import Footer from '~/components/partials/Footer'
+import Testimonials from '~/components/Testimonials'
 import Cta from '~/sections/Cta'
 import FaqGrid from '~/sections/Faqs'
 import ServicesScroll from '~/sections/Services'
@@ -22,6 +23,7 @@ export default function Home() {
         </button>
       </div>
       <ServicesScroll />
+      <Testimonials />
       <FaqGrid />
       <Cta />
       <Footer />
