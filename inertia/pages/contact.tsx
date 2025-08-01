@@ -19,7 +19,14 @@ export default function Contact() {
 
   return (
     <>
-      <Head title="Contact" />
+      <Head>
+        <title>Contactez tshr29 Studio à Sarreguemines | Agence Web</title>
+        <meta
+          name="description"
+          content="Contactez tshr29 Studio, agence web à Sarreguemines. Pour toute demande de création de site internet, design UX/UI ou communication digitale, envoyez-nous un message."
+        />
+      </Head>
+
       <main className="min-h-screen bg-neutral-950 flex items-center justify-center relative px-6 py-20 overflow-hidden">
         <div className="absolute bottom-0 left-[-20%] right-0 top-[20%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
         <div className="absolute bottom-0 right-[-20%] top-[30%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
@@ -35,7 +42,9 @@ export default function Contact() {
             <span className="py-1.5 uppercase font-medium border-neutral-700 rounded-full text-sm text-white/60">
               Contact
             </span>
-            <h1 className="text-4xl md:text-5xl tracking-tighter mt-4">Prendre contact</h1>
+            <h1 className="text-4xl md:text-5xl tracking-tighter mt-4">
+              Contactez tshr29 Studio à Sarreguemines
+            </h1>
             <p className="text-neutral-400 max-w-xl tracking-tight text-lg">
               Vous pouvez me contacter directement par e-mail ou via le formulaire ci-dessous. Je
               répondrai dès que possible.

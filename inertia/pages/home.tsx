@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react'
+import { Head, Link } from '@inertiajs/react'
 import Footer from '~/components/partials/Footer'
 import Testimonials from '~/components/Testimonials'
 import Cta from '~/sections/Cta'
@@ -8,6 +8,14 @@ import ServicesScroll from '~/sections/Services'
 export default function Home() {
   return (
     <>
+      <Head>
+        <title>Création de sites internet à Sarreguemines | tshr29 Studio</title>
+        <meta
+          name="description"
+          content="Agence web à Sarreguemines spécialisée dans la création de sites internet, design UX/UI et communication digitale. Donnez vie à vos projets avec tshr29 Studio."
+        />
+      </Head>
+
       <Navbar />
       <div className="h-screen bg-black flex flex-col justify-center px-8 pt-20">
         <h1 className="text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tighter tracking-tight max-w-5xl">
@@ -37,7 +45,7 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto flex justify-between">
         {/* Titre */}
         <div className="flex flex-col items-start">
-          <h1 className="text-white font-bold text-xl mb-2 text-left">tshr29 Studio</h1>
+          <div className="text-white font-bold text-xl mb-2 text-left">tshr29 Studio</div>
         </div>
 
         {/* Services */}
