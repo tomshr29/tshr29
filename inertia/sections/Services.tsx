@@ -61,8 +61,8 @@ export default function ServicesScroll() {
         const isLast = index === elements.length - 1
 
         ScrollTrigger.create({
-          trigger: section,
-          start: 'top top',
+          trigger: section as Element,
+          start: 'top+=80 top',
           end: isLast ? 'bottom bottom' : 'bottom top',
           pin: true,
           pinSpacing: isLast ? true : false,
@@ -75,7 +75,7 @@ export default function ServicesScroll() {
 
   return (
     <div ref={container} className="w-full">
-      <div className="bg-black p-10">
+      <div className="bg-black p-10 sticky top-0 z-50">
         <h2 className="text-5xl tracking-tighter text-white">Nos services</h2>
       </div>
       {sections.map(({ id, title, color, textColor, description, services }) => (
