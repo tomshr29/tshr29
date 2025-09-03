@@ -14,7 +14,7 @@ export default class ContactController {
       m.from('no-reply@tshr29.com')
         .to('tom.scherer@tshr29.com')
         .replyTo(payload.email, payload.name)
-        .subject('Nouveau message depuis formulaire de contact')
+        .subject('Nouveau message depuis formulaire de codentact')
         .html(
           `Nom: ${payload.name}<br>Email: ${payload.email}<br>Message:<br>${payload.message.replaceAll('\n', '<br>')}`
         )
