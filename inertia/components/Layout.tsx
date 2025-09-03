@@ -1,5 +1,4 @@
 import ReactLenis from 'lenis/react'
-import { Navbar } from '~/pages/home'
 import Footer from './Footer'
 
 interface Props {
@@ -11,7 +10,6 @@ export function Layout(props: Props) {
 
   return (
     <ReactLenis root>
-      <Navbar />
       <main>{children}</main>
       <Footer />
     </ReactLenis>
