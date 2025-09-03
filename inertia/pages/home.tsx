@@ -18,7 +18,7 @@ export default function Home() {
 
       <div className="h-screen bg-black flex flex-col justify-center px-8 pt-20">
         <h1 className="text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tighter tracking-tight max-w-7xl">
-          Agence digitale à Sarreguemines — sites web, design et communication.
+          Agence digitale à Sarreguemines — sites web, design et communication.e
         </h1>
         <p className="text-white text-xl mt-4">
           Nous aidons les entreprises locales à développer leur présence en ligne avec des solutions
