@@ -15,8 +15,12 @@ export default function Testimonials() {
         <figure className="mt-10">
           <blockquote className="text-center text-xl/8 font-semibold text-gray-900 sm:text-2xl/9">
             <p>
-              “Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo expedita voluptas culpa
-              sapiente alias molestiae. Numquam corrupti in laborum sed rerum et corporis.”
+              “Je suis <strong>Tom Scherer</strong>,{' '}
+              <strong>développeur web à Sarreguemines</strong>. Depuis plus de X années,
+              j’accompagne les entreprises et professionnels locaux dans la création de{' '}
+              <strong>sites web performants, modernes et sur-mesure</strong>. Mon objectif est de
+              transformer vos idées en solutions digitales concrètes, efficaces et adaptées à vos
+              besoins.”
             </p>
           </blockquote>
           <figcaption className="mt-10">

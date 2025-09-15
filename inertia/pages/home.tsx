@@ -1,4 +1,4 @@
-import { Head, Link } from '@inertiajs/react'
+import { Head } from '@inertiajs/react'
 import Testimonials from '~/sections/Testimonials'
 import Cta from '~/sections/Cta'
 import FaqGrid from '~/sections/Faqs'
