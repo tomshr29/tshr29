@@ -44,8 +44,7 @@ export default function FaqGrid() {
     <section className="px-6 py-28 bg-neutral-950 min-h-screen">
       <div className="max-w-6xl mx-auto flex gap-20 flex-col lg:flex-row">
         <div className="flex-1">
-          <label className="uppercase text-white">FAQs</label>
-          <h1 className="text-white text-5xl tracking-tight mb-4">Réponses à vos questions</h1>
+          <h1 className="text-white text-5xl scale-y-95 mb-4">Réponses à vos questions</h1>
           <span className="text-neutral-500 text-lg">
             Trouvez rapidement des réponses aux questions les plus fréquentes sur notre agence et
             nos services.
